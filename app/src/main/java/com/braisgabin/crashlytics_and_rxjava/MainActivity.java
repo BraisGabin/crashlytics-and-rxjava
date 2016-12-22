@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Func1;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +25,22 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException("Report this to Crashlytics, please!");
               }
             })
-            .subscribe();
+            .subscribe(new Subscriber<String>() {
+              @Override
+              public void onNext(String s) {
+
+              }
+
+              @Override
+              public void onError(Throwable e) {
+                throw new RuntimeException(e);
+              }
+
+              @Override
+              public void onCompleted() {
+
+              }
+            });
       }
     });
   }
